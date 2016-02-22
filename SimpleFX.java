@@ -32,9 +32,7 @@ public class SimpleFX extends Application {
         Application.launch(args);   // This is like the QApplication::exec() function in Qt.
     }
  
-    @Override
-
-    public void start(Stage stage) {
+    @Override public void start(Stage stage) {
 
         // Do some initialization on the stage.
 
@@ -50,6 +48,8 @@ public class SimpleFX extends Application {
         // Now we put the root node in the scene.
 
 	Scene scene = new Scene(GridLayout);
+        scene.getStylesheets().add("default.css");
+        GridLayout.getStyleClass().add("grid");
 
         // And assign the scene to the stage.
 
@@ -59,7 +59,8 @@ public class SimpleFX extends Application {
 
         // First we add some Text object.
         Text bannerText = new Text("Compute Area Of Trapezoid");
-        GridLayout.add(bannerText, 1, 1, 3, 1);
+        bannerText.getStyleClass().add("h1");
+        GridLayout.add(bannerText, 1, 1, 2, 1);
 
         // The First input
         Text labelOne = new Text("Height of trapezoid");
@@ -82,23 +83,32 @@ public class SimpleFX extends Application {
         GridLayout.add(textThree,  2, 4, 1, 1);
 
 
+        // The output area.
+        Text outputArea = new Text(" ");    // Initially empty.
+        GridLayout.add(outputArea,  1, 5, 2, 2);
+
         // Now for the Cancel and OK Buttons
+        // We create an HBox for the Buttons and place it in the layout.
+
         HBox buttonBox = new HBox();
-        GridLayout.add(buttonBox, 2, 5, 1, 1);
+        GridLayout.add(buttonBox, 1, 7, 2, 1);
+
+
+        // The cancel button.
 
 	Button CancelButton = new Button();
 	CancelButton.setText("Cancel");
 
-        // GridLayout.add(CancelButton, 2, 5, 1, 1);
-        // GridLayout.setMargin(CancelButton, new Insets(5));
-
 	Button OKButton = new Button();
 	OKButton.setText("  OK  ");
 
-        // GridLayout.add(OKButton, 3, 5, 1, 1);
-        // GridLayout.setMargin(OKButton, new Insets(5));
+        Text emptyText1 = new Text("                      "); // Adjust as required. Ugly hack.
 
-        buttonBox.getChildren().addAll(CancelButton, OKButton);
+        buttonBox.getChildren().addAll(emptyText1, CancelButton, OKButton);
+        buttonBox.getStyleClass().add("button-box"); // This should be here
+                                                     // in this exact line.
+                                                     // Sheeesh!
+
 
         // Need to add some spacer
         Text spacer1 = new Text("                      ");
