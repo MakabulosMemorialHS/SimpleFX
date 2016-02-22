@@ -1,0 +1,38 @@
+/* *******************************************************************************
+ * default.css
+ *
+ * For use with the SimpleFX.java template.
+ *
+ * Information about the CSS properties mentioned herein can be
+ * found in
+ *
+ * http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#intro
+ *
+ * For choosing HTML colors go to
+ *
+ * http://www.w3schools.com/colors/colors_picker.asp
+ *
+ * ******************************************************************************/
+
+.grid {
+    -fx-background-color : #dcdad6;
+    -fx-background-radius : 5.0;
+    -fx-background-insets : 0.0 5.0 0.0 5.0;
+    -fx-padding : 10pt;
+    -fx-hgap : 5pt;
+    -fx-vgap : 5pt;
+    -fx-margin : 10pt;
+}
+
+.button-box {
+    -fx-padding : 10pt;
+    -fx-spacing : 10pt
+}
+
+.h1 {
+    -fx-font-size : 17pt;
+    -fx-fill : #8d0600;
+    -fx-text-alignment : center;
+    -fx-font-weight : bold;
+}
+
