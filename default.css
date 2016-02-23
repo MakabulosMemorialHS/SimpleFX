@@ -12,16 +12,18 @@
  *
  * http://www.w3schools.com/colors/colors_picker.asp
  *
+ * The property names are very confusing. Read the comments besides each
+ * CSS property very carefully.
+ *
  * ******************************************************************************/
 
 .grid {
     -fx-background-color : #dcdad6;
     -fx-background-radius : 5.0;
-    -fx-background-insets : 0.0 5.0 0.0 5.0;
-    -fx-padding : 10pt;
-    -fx-hgap : 5pt;
-    -fx-vgap : 5pt;
-    -fx-margin : 10pt;
+    -fx-background-insets : 5.0 5.0 5.0 5.0;
+    -fx-padding : 10pt; /* margin around the grid */
+    -fx-spacing : 5pt;  /* spaces between child nodes */
+    -fx-alignment : center; /* Alignment of the child nodes within the grid. */
 }
 
 .button-box {
@@ -31,8 +33,19 @@
 
 .h1 {
     -fx-font-size : 17pt;
-    -fx-fill : #8d0600;
+    -fx-fill : #8d0600;   /* This would be the font color. No joking. */
     -fx-text-alignment : center;
     -fx-font-weight : bold;
+}
+
+.h2 {
+    -fx-font-size : 14pt;
+    -fx-fill : #1a0008;
+    -fx-text-alignment : center;
+    -fx-font-weight : bold;
+}
+
+.output-area {
+    -fx-fill : #8b008b;
 }
 
