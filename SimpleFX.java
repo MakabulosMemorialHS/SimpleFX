@@ -5,14 +5,12 @@
  * This program has the objective of serving as a template for
  * your simple programs.
  *
- * Revision History:
- *
- * $Id$
- *
- * $Log$
  *
  * **************************************************************************/
+import java.lang.*;
+import java.util.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -40,9 +38,51 @@ public class SimpleFX extends Application {
     TextField textOne = new TextField();
     TextField textTwo = new TextField();
     TextField textThree = new TextField();
+    Text outputArea = new Text("\n\n\n");    // Initially empty.
 
 
+    /* ****************************************************************************
+     * Thsi is the meat of the application.
+     * Clicking the OK button calls this mainFunction() so this is where
+     * yuou should put the business part of your javaFX application.
+     * ****************************************************************************/
 
+    public void mainFunction() {
+        /* The contents of input fields are made available to
+           us as Strings. Convert them to the data you require. */
+
+        String inputOne   = textOne.getText();
+        String inputTwo   = textTwo.getText();
+        String inputThree = textThree.getText();
+
+        try {
+	    /* Here we convert the above Strings to double values. */
+	    double height   = Double.parseDouble(inputOne);
+	    double baseOne  = Double.parseDouble(inputTwo);
+	    double baseTwo  = Double.parseDouble(inputThree);
+
+	    /* Now compute the area of the trapezoid. */
+	    double area = height*(baseOne+baseTwo)/2;
+
+     
+	    /* Output routine */
+	    String output = new String("The area of the trapezoid is\n" + area);
+
+	    /* Display output */
+	    outputArea.setText(output);
+        }
+        catch (NumberFormatException e) {
+            String output = new String("\nCannot parse one of the input.\n");
+            outputArea.setText(output);
+            return;
+        }
+        catch (NullPointerException e) {
+            String output = new String("\nNothing to compute.\n");
+            outputArea.setText(output);
+            return;
+        }
+    }
+    
     /* ****************************************************************************
      * Start of main(). Note that in JavaFX main() does not have much to do.
      * JavaFX relies on an event-driven model of programming.
@@ -113,7 +153,6 @@ public class SimpleFX extends Application {
         rootLayout.getChildren().add(tIBox);
 
         // The output area.
-        Text outputArea = new Text("First Line of Output\nSecond Line of Output");    // Initially empty.
         outputArea.getStyleClass().add("h2");
         rootLayout.getChildren().add(outputArea);
 
@@ -124,19 +163,48 @@ public class SimpleFX extends Application {
 
 
         // The cancel button.
+        // Clicking the CANCEL button should quit the application.
 
 	Button CancelButton = new Button();
 	CancelButton.setText("Cancel");
+        CancelButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                Platform.exit();
+                }
+            }
+        );
 
         // The clear button
+        // Clicking the CLEAR Button should clear the input and output fields.
+        // All of them.
 
 	Button ClearButton = new Button();
 	ClearButton.setText("Clear");
+        ClearButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                outputArea.setText("\n\n\n");
+                textOne.setText("");
+                textTwo.setText("");
+                textThree.setText("");
+                }
+            }
+        );
+
 
         // The OK button
-
+        // When the OK button is clicked, the EventHandler will call the function
+        // mainFunction().
 	Button OKButton = new Button();
 	OKButton.setText("  OK  ");
+        OKButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                mainFunction();
+                }
+            }
+        );
 
         Text emptyText1 = new Text("              "); // Adjust as required. Ugly hack.
 
