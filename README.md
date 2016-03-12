@@ -3,4 +3,4 @@ A simple JavaFX Template that can be used by beginning students who want to prog
 
 Status:
 
-Still a work in progress. Not done yet.
+SimpleFX is now working and can be used as a template.
