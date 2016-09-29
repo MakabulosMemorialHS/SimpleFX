@@ -30,13 +30,11 @@
 
    The palette comes from:
 
-   http://paletton.com/#uid=14q0u0kllll9rGbfosyrie8zI6X
-
+   http://paletton.com/#uid=23l0u0kllll2xI0bWsQvsbxTt6l
 */
 
 .grid {
-    -fx-background-color : #110326; 
-    /* -fx-background-image : url("dark-blue-background-portrait.jpg"); */
+    -fx-background-color : #023238; 
 
     /* The following rules are meant for background images.
        Commented out since I don't need it for the current rule.
@@ -54,7 +52,8 @@
     -fx-vgap : 15pt; /* intergap spacing between rows of cells */
     -fx-padding : 20pt; /* margin around the grid */
     -fx-spacing : 10pt;  /* spaces between child nodes */
-    -fx-alignment : center; /* Alignment of the child nodes within the grid. */
+    -fx-alignment : right; /* Alignment of the child nodes within the grid. */
+    /* -fx-grid-lines-visible : true; Used for debugging the visual design */
 }
 
 .grid2 {
@@ -80,6 +79,12 @@
 }
 
 
+/* Style for the Buttons */
+
+.buttons {
+    -fx-background-color : #fff5eb; /* Color of the button-box */
+    -fx-min-width : 100;
+}
 
 /* For the HBox containing the OK and Cancel Buttons. */
 
@@ -87,44 +92,51 @@
     -fx-alignment : center-right;   /* Where the buttons are located. */
     -fx-padding : 5pt;              /* The spacing around contents of the HBox */
     -fx-spacing : 10pt;             /* Spacing between Buttons */
-    -fx-background-color : #28114d; /* Color of the HBox */
+    -fx-background-color : #023238; /* Color of the button-box */
 }
 
+
+.title-box {
+    -fx-alignment : center;   /* Where the buttons are located. */
+}
 
 /* For the TextFields. I find the default color so glaring. */
 
 .text-entries {
-    -fx-background-color : #a994ca;
+    -fx-background-color : #fff5eb;
 }
 
 .h1 { /* For uses similar to HTML's H1 tag. */
     -fx-font-size : 17pt;
-    -fx-fill : #fff9e6;   /* This would be the font color. No joking. */
+    -fx-text-fill : #e6b990;   /* This would be the font color. No joking. */
+    -fx-alignment : right;
     -fx-text-alignment : center;
     -fx-font-weight : normal;
     -fx-padding : 15pt;
 }
 
 
-.h2 { /* For use similar to HTML's H2. */
-    -fx-font-size : 14pt;
-    -fx-fill : #1a0008;
+.text-area { /* For the TextArea */
+    -fx-font-size : 25pt;
+    -fx-max-width : 240;
+    -fx-max-height : 150;
+    -fx-text-fill : #001b1f;
+    -fx-fill : #59868d;
     -fx-text-alignment : center;
     -fx-font-weight : normal;
+    -fx-background-color : #023238; 
 }
 
 
 .field-labels { /* Used for labelling text fields */
     -fx-font-size : 12pt;
-    -fx-text-alignment : center;
-    -fx-fill : #ffffff;    /* This is the font color. It is pure white. */
-    /* -fx-fill : #fff9e6;   This is the old color. */
+    -fx-text-fill : #e6b990;    /* This is the font color. */
 }
 
 
 .normaltext { /* Used for normal sized Text labels */
     /* -fx-font-size : 12pt; */
     -fx-text-alignment : right;
-    /* -fx-fill : #fff9e6;   This would be the font color. No joking. */
+    -fx-fill : #b5c2c4;   /* This would be the font color. No joking. */
 }
 

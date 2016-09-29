@@ -7,6 +7,8 @@
  *
  *
  * **************************************************************************/
+package ph.mmhsvictoria.demos.simplefx;
+
 import java.lang.*;
 import java.util.*;
 import javafx.application.Application;
@@ -16,6 +18,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,61 +30,15 @@ import javafx.geometry.*;
 
 public class SimpleFX extends Application {
 
-    /* *****************************************************************************
-     * These are the TextFields which accept user input. We put
-     * them here because we want the other functions to have access to them.
-     * We define three of them but you can add more if your program needs it
-     * but don't forget to make the adjustments in the layout. These TextFields will be
-     * layed out in start() function.
-     *
-     * ****************************************************************************/
-
-    TextField textOne = new TextField();
-    TextField textTwo = new TextField();
-    TextField textThree = new TextField();
-    Text outputArea = new Text("\n\n\n");    // Initially empty.
-
-
     /* ****************************************************************************
-     * Thsi is the meat of the application.
+     * This is the meat of the application.
      * Clicking the OK button calls this mainFunction() so this is where
      * yuou should put the business part of your javaFX application.
      * ****************************************************************************/
 
-    public void mainFunction() {
-        /* The contents of input fields are made available to
-           us as Strings. Convert them to the data you require. */
-
-        String inputOne   = textOne.getText();
-        String inputTwo   = textTwo.getText();
-        String inputThree = textThree.getText();
-
-        try {
-	    /* Here we convert the above Strings to double values. */
-	    double height   = Double.parseDouble(inputOne);
-	    double baseOne  = Double.parseDouble(inputTwo);
-	    double baseTwo  = Double.parseDouble(inputThree);
-
-	    /* Now compute the area of the trapezoid. */
-	    double area = height*(baseOne+baseTwo)/2;
-
-     
-	    /* Output routine */
-	    String output = new String("The area of the trapezoid is\n" + area);
-
-	    /* Display output */
-	    outputArea.setText(output);
-        }
-        catch (NumberFormatException e) {
-            String output = new String("\nCannot parse one of the input.\n");
-            outputArea.setText(output);
-            return;
-        }
-        catch (NullPointerException e) {
-            String output = new String("\nNothing to compute.\n");
-            outputArea.setText(output);
-            return;
-        }
+    public long mainFunction(int firstTerm, int secondTerm, int nValue) {
+        int commonDiff = secondTerm - firstTerm;
+	return (long) firstTerm + (nValue - 1) * commonDiff;
     }
     
     /* ****************************************************************************
@@ -104,69 +62,169 @@ public class SimpleFX extends Application {
 
     @Override public void start(Stage stage) {
 
+        /* Initialize the global variables. */
+
         // Do some initialization on the stage.
-
-        stage.setTitle("JavaFX Template");
-
-        // Now we will create a scene. A scene is composed of 
-        // a root node and its children. As a root node, we will use
-        // a VBox object.
-
-        VBox rootLayout = new VBox();
-
-        // Now we put the root node in the scene.
-
+        GridPane rootLayout = new GridPane();
 	Scene scene = new Scene(rootLayout);
-        scene.getStylesheets().add("default.css");
+        scene.getStylesheets().add("css/default.css");
         rootLayout.getStyleClass().add("grid");
 
         // And assign the scene to the stage.
 
 	stage.setScene(scene);
+        stage.setTitle("Demonstration Application");
 
-        // Now we add children to the root node (which is embedded in our scene).
+        // Now we add children to the root node rootLayout (which is embedded in our scene).
 
-        // First we add some Text object.
-        Text bannerText = new Text("Compute Area\nOf Trapezoid");
-        bannerText.getStyleClass().add("h1");
-        rootLayout.getChildren().add(bannerText);
+        // First we add the Label at the top of the Pane.
 
-        // The First input
-        HBox fIBox = new HBox();
-
-        Text labelOne = new Text("Height of trapezoid        ");
-        fIBox.getChildren().addAll(labelOne, textOne);
-        rootLayout.getChildren().add(fIBox);
-
-        // The Second input
-
-        HBox sIBox = new HBox();
-        Text labelTwo = new Text("Length of shortest base ");
-        sIBox.getChildren().addAll(labelTwo, textTwo);
-        rootLayout.getChildren().add(sIBox);
+        HBox hb = new HBox();
+        hb.getStyleClass().add("title-box");
+        GridPane.setColumnIndex(hb, 0);
+        GridPane.setRowIndex(hb, 0);
+        GridPane.setColumnSpan(hb, 2);
+        Label bl = new Label("Arithmetic Sequences");
+        bl.getStyleClass().add("h1");
+        hb.getChildren().add(bl);
+        rootLayout.getChildren().add(hb);
 
 
-        // The Third input
-        HBox tIBox = new HBox();
-        Text labelThree = new Text("Length of longest base  ");
-        tIBox.getChildren().addAll(labelThree, textThree);
-        rootLayout.getChildren().add(tIBox);
+        // Now comes the labels for the various Inputs.
 
-        // The output area.
-        outputArea.getStyleClass().add("h2");
-        rootLayout.getChildren().add(outputArea);
+        Label lb1 = new Label("First Term");
+        lb1.getStyleClass().add("field-labels");
+
+        HBox dhbfl1 = new HBox();
+        dhbfl1.setAlignment(Pos.CENTER_RIGHT);
+        dhbfl1.getChildren().add(lb1);
+        GridPane.setColumnIndex(dhbfl1, 0);
+        GridPane.setRowIndex(dhbfl1, 1);
+        GridPane.setColumnSpan(dhbfl1, 1);
+        rootLayout.getChildren().add(dhbfl1);
+
+
+        Label lb2 = new Label("Second Term");
+        lb2.getStyleClass().add("field-labels");
+
+        HBox dhbfl2 = new HBox();
+        dhbfl2.setAlignment(Pos.CENTER_RIGHT);
+        dhbfl2.getChildren().add(lb2);
+        GridPane.setColumnIndex(dhbfl2, 0);
+        GridPane.setRowIndex(dhbfl2, 2);
+        GridPane.setColumnSpan(dhbfl2, 1);
+        rootLayout.getChildren().add(dhbfl2);
+
+        Label lb3 = new Label("Index");
+        lb3.getStyleClass().add("field-labels");
+
+        HBox dhbfl3 = new HBox();
+        dhbfl3.setAlignment(Pos.CENTER_RIGHT);
+        dhbfl3.getChildren().add(lb3);
+        GridPane.setColumnIndex(dhbfl3, 0);
+        GridPane.setRowIndex(dhbfl3, 3);
+        GridPane.setColumnSpan(dhbfl3, 1);
+        rootLayout.getChildren().add(dhbfl3);
+
+
+        // The TextFields for the inputs come next.
+
+        TextField tf1 = new TextField("");
+        GridPane.setColumnIndex(tf1, 1);
+        GridPane.setRowIndex(tf1, 1);
+        GridPane.setColumnSpan(tf1, 1);
+        tf1.getStyleClass().add("text-entries");
+        rootLayout.getChildren().add(tf1);
+
+        TextField tf2 = new TextField("");
+        GridPane.setColumnIndex(tf2, 1);
+        GridPane.setRowIndex(tf2, 2);
+        GridPane.setColumnSpan(tf2, 1);
+        tf2.getStyleClass().add("text-entries");
+        rootLayout.getChildren().add(tf2);
+
+        TextField tf3 = new TextField("");
+        GridPane.setColumnIndex(tf3, 1);
+        GridPane.setRowIndex(tf3, 3);
+        GridPane.setColumnSpan(tf3, 1);
+        tf3.getStyleClass().add("text-entries");
+        rootLayout.getChildren().add(tf3);
+
+        // The TextArea
+        TextArea resultArea = new TextArea();
+        resultArea.setEditable(false);
+        GridPane.setColumnIndex(resultArea, 0);
+        GridPane.setRowIndex(resultArea, 4);
+        GridPane.setColumnSpan(resultArea, 1);
+        GridPane.setRowSpan(resultArea, 3);
+        resultArea.getStyleClass().add("text-area");
+        rootLayout.getChildren().add(resultArea);
 
         // Now for the Cancel, Clear, and OK Buttons
-        // We create an HBox for the Buttons and place it in the layout.
+        // We create a VBox for the Buttons and place it in the layout.
 
-        HBox buttonBox = new HBox();
+        VBox buttonBox = new VBox();
+        GridPane.setColumnIndex(buttonBox, 1);
+        GridPane.setRowIndex(buttonBox, 4);
+        GridPane.setColumnSpan(buttonBox, 1);
+        GridPane.setRowSpan(buttonBox, 3);
+        buttonBox.getStyleClass().add("button-box");
+        rootLayout.getChildren().add(buttonBox);
+
+        // The OK button
+        // When the OK button is clicked, the EventHandler will call the function
+        // mainFunction().
+	Button OKButton = new Button();
+	OKButton.setText("OK");
+        OKButton.getStyleClass().add("buttons");
+        buttonBox.getChildren().add(OKButton);
+        OKButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                    int firstTerm, secondTerm, nValue;
+
+		    try {
+			/* Here we convert the above Strings to double values. */
+			firstTerm  = Integer.parseInt(tf1.getText());
+			secondTerm = Integer.parseInt(tf2.getText());
+			nValue     = Integer.parseInt(tf3.getText());
+		        long result = mainFunction(firstTerm, secondTerm, nValue);
+                        resultArea.setText(String.format("\n%d", result));
+		    }
+		    catch (NumberFormatException exc) {
+                        resultArea.setText("Illegal\nNumber\nFormat");
+		    }
+		    catch (NullPointerException exc) {
+                        resultArea.setText("Illegal\nNumber\nFormat");
+		    }
+		}
+	    }
+        );
+
+
+	Button ClearButton = new Button();
+	ClearButton.setText("Clear");
+        ClearButton.getStyleClass().add("buttons");
+        buttonBox.getChildren().add(ClearButton);
+        ClearButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e) {
+                tf1.setText("");
+                tf2.setText("");
+                tf3.setText("");
+                resultArea.setText("");
+                }
+            }
+        );
 
 
         // The cancel button.
         // Clicking the CANCEL button should quit the application.
 
 	Button CancelButton = new Button();
-	CancelButton.setText("Cancel");
+	CancelButton.setText("Quit");
+        CancelButton.getStyleClass().add("buttons");
+        buttonBox.getChildren().add(CancelButton);
         CancelButton.setOnAction(
             new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent e) {
@@ -175,45 +233,7 @@ public class SimpleFX extends Application {
             }
         );
 
-        // The clear button
-        // Clicking the CLEAR Button should clear the input and output fields.
-        // All of them.
-
-	Button ClearButton = new Button();
-	ClearButton.setText("Clear");
-        ClearButton.setOnAction(
-            new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent e) {
-                outputArea.setText("\n\n\n");
-                textOne.setText("");
-                textTwo.setText("");
-                textThree.setText("");
-                }
-            }
-        );
-
-
-        // The OK button
-        // When the OK button is clicked, the EventHandler will call the function
-        // mainFunction().
-	Button OKButton = new Button();
-	OKButton.setText("  OK  ");
-        OKButton.setOnAction(
-            new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent e) {
-                mainFunction();
-                }
-            }
-        );
-
-        Text emptyText1 = new Text("              "); // Adjust as required. Ugly hack.
-
-        buttonBox.getChildren().addAll(emptyText1, CancelButton, ClearButton, OKButton);
-        buttonBox.getStyleClass().add("button-box"); // This should be here
-                                                     // in this exact line.
-                                                     // Sheeesh!
-        rootLayout.getChildren().add(buttonBox);
-
+       
 	stage.show();
     }
 }
