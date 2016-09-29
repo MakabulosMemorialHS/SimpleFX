@@ -1,16 +1,25 @@
 # SimpleFX
-A collection of simple JavaFX Templates that can be used by beginning students who want to program in something that looks better than using java.util.Scanner.
+A simple demonstration of JavaFX. Hopefully, this demo can be used
+by High School students to develop their own JavaFX applications.
 
-Status: In Active Development.
+Important Notice: This application requires Gradle to build.
 
-Manifest:
+If you don't have gradle, either download the software (it's free)
+or you can do the following:
 
-SimpleFX.java --- The main template. Quite useable by high school students studying Java.
+1. Look for the file src/main/java/ph/mmhsvictoria/demos/simplefx/SimpleFX.java
+   and remove the package statement.
 
-Temperature.java --- Demonstration of how to emulate Qt's SIGNALS and SLOTS mechanism.
+2. Seatch for the string
 
-Temperature.css --- Style rules for Temperature.java
+   scene.getStylesheets().add("css/default.css");
 
-default.css --- Used by SimpleFX.java. This style sheet has reasonable default values that can be used in
-various projects.
+   and replace it with
+
+   scene.getStylesheets().add("default.css");
+
+3. Copy the file src/main/resources/css/default.css
+   and copy it to the same directory which contains SimpleFX.java
+
+4. Give the proper command to compile and execute SimpleFX.java
 
